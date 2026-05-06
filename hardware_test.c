@@ -51,11 +51,9 @@ int run_test(volatile uint32_t *sha256_regs, test_vector_t *test) {
     printf("Test: %s\n", test->name);
     printf("========================================\n");
 
-    // Clear any previous state
     sha256_regs[24] = 0x0;
     usleep(1000);
 
-    // Write input data
     printf("Writing input...\n");
     for (int i = 0; i < 16; i++) {
         sha256_regs[i] = test->input[i];
@@ -63,7 +61,6 @@ int run_test(volatile uint32_t *sha256_regs, test_vector_t *test) {
 
     __sync_synchronize();
 
-    // Verify writes
     printf("Verifying writes...\n");
     int write_errors = 0;
     for (int i = 0; i < 16; i++) {
@@ -81,7 +78,6 @@ int run_test(volatile uint32_t *sha256_regs, test_vector_t *test) {
     }
     printf("✓ All writes verified\n");
 
-    // Start computation
     printf("\nStarting computation...\n");
     sha256_regs[24] = 0x1;
     __sync_synchronize();
