@@ -88,5 +88,6 @@ module DE1_SoC (
         .memory_mem_dm                   (HPS_DDR3_DM),        
         .memory_oct_rzqin                (HPS_DDR3_RZQ)        
     );
+
     
 endmodule
